@@ -49,3 +49,5 @@ export const seedStocks = async () => {
     }
   ]);
 }; 
+
+// figure out how they want the search stock to work, and ask if they are usinh y finanace or our seeded data base
