@@ -24,8 +24,23 @@ export const login = async (req: Request, res: Response) => {
   }
 };
 
-const router = Router();
+export const register = async (req: Request, res: Response) => {
+  try {
+   const user = await User.create(req.body);
+    const accessToken = jwt.sign({ username: user.username }, process.env.JWT_SECRET_KEY!, { expiresIn: '2h' });
+    return res.json({ accessToken });
 
+  } catch (error: any) {
+    return res.status(500).json({ message: 'Error, try again' });
+  }
+};
+
+const router = Router();
+// TO DO: Create a function for sign up or registration of a user
+// create route for said function
+// POST /register - Register a new user
+
+router.post('/register', register);
 // POST /login - Login a user
 router.post('/login', login);
 

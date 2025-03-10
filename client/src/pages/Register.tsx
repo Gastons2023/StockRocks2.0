@@ -1,18 +1,19 @@
 import { useState, FormEvent, ChangeEvent } from "react";
 
 import Auth from '../utils/auth';
-import { login } from "../api/authAPI";
+import { register } from "../api/authAPI";
 
-const Login = () => {
-  const [loginData, setLoginData] = useState({
+const Register = () => {
+  const [registerData, setRegisterData] = useState({
     username: '',
+    email: '',
     password: ''
   });
 
   const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
-    setLoginData({
-      ...loginData,
+    setRegisterData({
+      ...registerData,
       [name]: value
     });
   };
@@ -20,30 +21,36 @@ const Login = () => {
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
     try {
-      const data = await login(loginData);
-      console.log('Logged in', data);
+      const data = await register(registerData);
       Auth.login(data.accessToken);
     } catch (err) {
-      console.error('Failed to login', err);
+      console.error('Failed to register', err);
     }
   };
 
   return (
     <div className='container'>
       <form className='form' onSubmit={handleSubmit}>
-        <h1>Login</h1>
+        <h1>Register</h1>
         <label >Username</label>
         <input 
           type='text'
           name='username'
-          value={loginData.username || ''}
+          value={registerData.username || ''}
+          onChange={handleChange}
+        />
+        <label >email</label>
+        <input 
+          type='email'
+          name='email'
+          value={registerData.email|| ''}
           onChange={handleChange}
         />
       <label>Password</label>
         <input 
           type='password'
           name='password'
-          value={loginData.password || ''}
+          value={registerData.password || ''}
           onChange={handleChange}
         />
         <button type='submit'>Submit Form</button>
@@ -53,4 +60,4 @@ const Login = () => {
   )
 };
 
-export default Login;
+export default Register;
