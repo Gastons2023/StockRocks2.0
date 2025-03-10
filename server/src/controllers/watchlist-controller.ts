@@ -1,9 +1,8 @@
 import { Request, Response } from 'express';
 import { Watchlist } from '../models/watchlist.js';
-import { User } from '../models/user.js';
 import yahooFinance from 'yahoo-finance2';
 
-export const getWatchList = async (req: Request, res: Response) => {
+export const getWatchList = async (_: Request, res: Response) => {
     try {
         const wtchlist = await Watchlist.findAll();
 
