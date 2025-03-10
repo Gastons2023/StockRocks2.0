@@ -4,7 +4,11 @@ import yahooFinance from 'yahoo-finance2';
 
 export const getWatchList = async (_: Request, res: Response) => {
     try {
-        const wtchlist = await Watchlist.findAll();
+        const wtchlist = await Watchlist.findAll({
+            where: {
+                
+            }
+        });
 
         res.json(wtchlist);
     } catch (error: any) {
