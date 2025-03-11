@@ -63,6 +63,8 @@ export const updateUser = async (req: Request, res: Response) => {
 // DELETE /Users/:id
 export const deleteUser = async (req: Request, res: Response) => {
   const { id } = req.params;
+  console.log('id', id)
+  
   try {
     const user = await User.findByPk(id);
     if (user) {

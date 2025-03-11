@@ -1,17 +1,19 @@
-import { DataTypes, Model, Sequelize } from 'sequelize';
+import { DataTypes, Model, Sequelize, Optional } from 'sequelize';
 
-interface StockJournalAttributes {
+export interface StockJournalAttributes {
   id: number;
   symbol: string;
   entryPrice: number;
-  exitPrice?: number;
+  exitPrice?: number | null;
   purchaseDate: Date;
-  saleDate?: Date;
+  saleDate?: Date | null;
   positionSize: number;
-  returns?: number;
+  returns?: number | null;
 }
 
-export class StockJournal extends Model<StockJournalAttributes> {}
+interface StockJournalAttributesWithId extends Optional<StockJournalAttributes, 'id'> {}
+
+export class StockJournal extends Model<StockJournalAttributesWithId> {}
 
 export function StockJournalFactory(sequelize: Sequelize) {
   StockJournal.init(
@@ -56,4 +58,5 @@ export function StockJournalFactory(sequelize: Sequelize) {
       timestamps: true,
     }
   );
+  return StockJournal;
 }

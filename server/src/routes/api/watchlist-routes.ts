@@ -1,10 +1,10 @@
-import express from "express";
-import { getWatchList, saveToWatchList } from '../../controllers/watchlist-controller.js'
+// import express from "express";
+// import { getWatchList, saveToWatchList } from '../../controllers/stockJournalController.js'
 
-const router = express.Router();
+// const router = express.Router();
 
-router.get("/", getWatchList)
+// router.get("/", getWatchList)
 
-router.post("/", saveToWatchList)
+// router.post("/", saveToWatchList)
 
-export {router as watchlistRouter};
+// export {router as watchlistRouter};

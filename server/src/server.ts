@@ -1,6 +1,7 @@
 import express from 'express';
 import dotenv from 'dotenv';
-import stockJournalRoutes from './routes/api/stockJournalRoutes';
+import {stockJournalRouter} from './routes/api/stockJournal-routes.js';
+import {sequelize} from './models/index.js'
 
 dotenv.config();
 
@@ -11,8 +12,10 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 // ✅ Use stock journal routes
-app.use('/api/stockJournal', stockJournalRoutes);
+app.use('/api/stockJournal', stockJournalRouter);
 
-app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}`);
+sequelize.sync({force: false}).then(() => {
+  app.listen(PORT, () => {
+    console.log(`Server is listening on port ${PORT}`);
+  });
 });
