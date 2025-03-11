@@ -22,7 +22,7 @@ const Register = () => {
     e.preventDefault();
     try {
       const data = await register(registerData);
-      Auth.login(data.accessToken);
+      Auth.login(data.token);
     } catch (err) {
       console.error('Failed to register', err);
     }

@@ -1,6 +1,9 @@
 import { Outlet } from 'react-router-dom';
+
 import Navbar from './components/Navbar';
+
 function App() {
+
   return (
     <div className='container'>
       <Navbar />
@@ -10,5 +13,5 @@ function App() {
     </div>
   )
 }
+
 export default App
-// create a 
