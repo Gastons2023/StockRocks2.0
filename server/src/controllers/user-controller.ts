@@ -1,5 +1,6 @@
 import { Request, Response } from 'express';
 import { User } from '../models/user.js';
+import jwt from 'jsonwebtoken';
 
 // GET /Users
 export const getAllUsers = async (_req: Request, res: Response) => {
@@ -32,10 +33,15 @@ export const getUserById = async (req: Request, res: Response) => {
 
 // POST /Users
 export const createUser = async (req: Request, res: Response) => {
-  const { username, password } = req.body;
+  const { username, password, email } = req.body;
   try {
-    const newUser = await User.create({ username, password });
-    res.status(201).json(newUser);
+    const newUser = await User.create({ username, password, email });
+
+      const secretKey = process.env.JWT_SECRET_KEY || 'hygyugjlgjgtftfdjdtr';
+    
+      const token = jwt.sign({ id: newUser.id, username: newUser.username }, secretKey, { expiresIn: '1h' });
+    
+    res.status(201).json({token, newUser});
   } catch (error: any) {
     res.status(400).json({ message: error.message });
   }

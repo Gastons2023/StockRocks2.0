@@ -31,7 +31,6 @@ const Navbar = () => {
       <ul>
       {
         !loginCheck ? (
-
          <>
          <li className='nav-item'>
             <button type='button'>
@@ -58,4 +57,3 @@ const Navbar = () => {
 }
 
 export default Navbar;
-

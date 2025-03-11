@@ -1,11 +1,15 @@
 import { JwtPayload, jwtDecode } from 'jwt-decode';
 
+interface CustomJwtPayload extends JwtPayload {
+  id: number;
+  username: string;
+}
+
 class AuthService {
-  getProfile() {
+  getProfile(): CustomJwtPayload | null {
     const token = this.getToken();
-    return token ? (jwtDecode(token) as JwtPayload) : null; 
+    return token ? (jwtDecode(token) as CustomJwtPayload) : null;
   }
-  // Checks if the user is logged in
 
 
   loggedIn() {
@@ -13,6 +17,15 @@ class AuthService {
     return !!token && !this.isTokenExpired(token);
   }
   
+  getUserId(): number | null {
+    const profile = this.getProfile();
+    if (!profile) {
+      throw new Error("User ID not found in token."); 
+    }
+    return profile ? profile.id : null; 
+  }
+
+
   isTokenExpired(token: string) {
     const decoded = jwtDecode(token) as JwtPayload;
     if (decoded.exp) {
@@ -26,21 +39,14 @@ class AuthService {
   }
 
   login(idToken: string) {
-    // Save the token to localStorage
     localStorage.setItem('id_token', idToken);
-    // Redirect to the homepage
     window.location.assign('/');
   
   }
 
   logout() {
-
-    // TODO: remove the token from localStorage
     localStorage.removeItem('id_token'); 
-
-    // TODO: redirect to the login page
-    window.location.assign('/login');
-  
+    window.location.assign('/');
    
   }
 }

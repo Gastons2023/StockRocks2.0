@@ -1,13 +1,13 @@
 import { Router } from 'express';
-import { ticketRouter } from './ticket-routes.js';
+import { stockRouter } from './stock-routes.js';
 import { userRouter } from './user-routes.js';
-import { watchlistRouter } from './watchlist-routes.js';
+import {yahooRouter} from './yahoo-routes.js';
 
 const router = Router();
 
-router.use('/tickets', ticketRouter);
+router.use('/stocks', stockRouter);
 router.use('/users', userRouter);
-router.use("/watchlist", watchlistRouter);
+router.use('/yahoo', yahooRouter);
 
 export default router;
 

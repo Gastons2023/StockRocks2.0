@@ -1,7 +1,6 @@
 import { UserLogin } from "../interfaces/UserLogin";
 
 export const login = async (userInfo: UserLogin) => {
-  // Replace with your actual API endpoint
   const response = await fetch('/auth/login', {
     method: 'POST',
     headers: {
@@ -19,7 +18,6 @@ export const login = async (userInfo: UserLogin) => {
 };
 
 export const register = async (userInfo: UserLogin) => {
-  // Replace with your actual API endpoint
   const response = await fetch('/auth/register', {
     method: 'POST',
     headers: {
