@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { StockData } from '../interfaces/StockData';
 import StockCard from '../components/StockCard';
 import SearchBar from '../components/SearchBar';
-import { retrieveStocks, deleteStock as deleteStockAPI, createStock, updateStock, getYahooFinanceData } from '../api/stockAPI';
+import { retrieveStocks, deleteStock as deleteStockAPI, createStock, updateStock, } from '../api/stockAPI';
 import ErrorPage from './ErrorPage';
 import StockForm from '../components/StockForm';
 import auth from '../utils/auth';  
