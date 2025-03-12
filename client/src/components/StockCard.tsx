@@ -6,7 +6,7 @@ interface StockCardProps {
   onEdit: (stock: StockData) => void;
 }
 
-const StockCard = ({ stock, onDelete }: StockCardProps) => {
+const StockCard = ({ stock, onDelete, onEdit }: StockCardProps) => {
 
 
   return (
@@ -14,7 +14,7 @@ const StockCard = ({ stock, onDelete }: StockCardProps) => {
       <h2>{stock.companyName || 'Unknown'} ({stock.symbol || 'N/A'})</h2>
       <p>Current Price: ${Number(stock.currentPrice || 0).toFixed(2)}</p>
       <div>
-      <button>Edit</button>
+      <button onClick={() => onEdit(stock)}>Edit</button>
         <button onClick={() => onDelete(stock.id)}>Delete</button>
       </div>
     </div>

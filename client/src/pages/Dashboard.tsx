@@ -61,46 +61,33 @@ const Dashboard = () => {
     setShowForm(true);
   };
 
-  // Save stock
-// TODO: Handle saving a stock entry
 // - Ensure the user is logged in before proceeding
 // - Assign the logged-in user ID if assignedUserId is missing
 // - Update the stock if it has an ID, otherwise create a new stock
-// - Refresh the stock list after saving
+
+// Refresh the stock list after saving
+
   const handleSaveStock = async (stock: StockData) => {
-    if (!auth.loggedIn()) {
-      console.error("User is not logged in.");
-      return;
-    }
-
-    const userId = auth.getProfile()?.id;
-    if (!userId) {
-      console.error("User ID is missing.");
-      return;
-    }
-
-    if (!stock.assignedUserId) {
-      stock.assignedUserId = userId;
-    }
-
     try {
-      if (stock.id) {
-        // Update stock
-        const updatedStock = await updateStock(stock.id, stock);
-        console.log(`Stock with ID ${stock.id} updated`);
-
-        setStocks(stocks.map(s => (s.id === updatedStock.id ? updatedStock : s)));
-        setFilteredStocks(filteredStocks.map(s => (s.id === updatedStock.id ? updatedStock : s)));
-      } else {
-        // Create stock
-        const newStock = await createStock(stock);
-        console.log(`Stock with ID ${newStock.id} created`);
-
-        setStocks([...stocks, newStock]);
-        setFilteredStocks([...filteredStocks, newStock]);
+      const userId = auth.getProfile()?.id; 
+      if (!userId) {
+        console.error('User not logged in. Cannot save stock.');
+        return;
       }
-
-      setShowForm(false);
+  
+      const updatedStock = {
+        ...stock,
+        assignedUserId: stock.assignedUserId ?? userId, 
+      };
+  
+      if (updatedStock.id) {
+        await updateStock(updatedStock.id, updatedStock);
+      } else {
+        await createStock(updatedStock);
+      }
+  
+      fetchStocks();
+      setShowForm(false); 
     } catch (error) {
       console.error('Failed to save stock:', error);
     }
