@@ -1,13 +1,14 @@
 import { Router } from 'express';
-import { stockRouter } from './stock-routes.js';
+import { ticketRouter } from './ticket-routes.js';
 import { userRouter } from './user-routes.js';
-import {yahooRouter} from './yahoo-routes.js';
+import { stockJournalRouter } from './stockJournal-routes.js';
 
 const router = Router();
 
-router.use('/stocks', stockRouter);
+router.use('/tickets', ticketRouter);
 router.use('/users', userRouter);
-router.use('/yahoo', yahooRouter);
+router.use("/stockJournal", stockJournalRouter);
+
 
 export default router;
 

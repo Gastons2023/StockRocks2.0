@@ -3,8 +3,8 @@ dotenv.config();
 
 import { Sequelize } from 'sequelize';
 import { UserFactory } from './user.js';
-import { StockFactory } from './stock.js';
-
+import { TicketFactory } from './ticket.js';
+import { StockJournalFactory } from './stockJournal.js'; 
 
 const sequelize = process.env.DB_URL
   ? new Sequelize(process.env.DB_URL)
@@ -17,9 +17,15 @@ const sequelize = process.env.DB_URL
     });
 
 const User = UserFactory(sequelize);
-const Stock = StockFactory(sequelize);
+const Ticket = TicketFactory(sequelize);
+const StockJournal = StockJournalFactory(sequelize); 
 
-User.hasMany(Stock, { foreignKey: 'assignedUserId' });
-Stock.belongsTo(User, { foreignKey: 'assignedUserId', as: 'assignedUser' });
 
-export { sequelize, User, Stock};
+User.hasMany(Ticket, { foreignKey: 'assignedUserId' });
+Ticket.belongsTo(User, { foreignKey: 'assignedUserId', as: 'assignedUser' });
+
+
+User.hasMany(StockJournal, { foreignKey: 'userId' });
+StockJournal.belongsTo(User, { foreignKey: 'userId', as: 'user' });
+
+export { sequelize, User, Ticket, StockJournal }; 
