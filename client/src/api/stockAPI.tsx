@@ -103,7 +103,12 @@ const deleteStock = async (stockId: number): Promise<ApiMessage> => {
 
 const getYahooFinanceData = async (symbol: string) => {
   try {
-    const response = await fetch(`/api/yahoo/${symbol}`);
+    const response = await fetch(`/api/yahoo/${symbol}`, {
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${Auth.getToken()}`
+      }
+    });
     if (!response.ok) {
       throw new Error('Invalid API response, check network tab!');
     }

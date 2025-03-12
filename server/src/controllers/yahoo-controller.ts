@@ -10,7 +10,7 @@ interface StockData {
 export const getStock = async (req: Request, res:Response) => {
     try {
         const data = await yahooFinance.quote(req.params.symbol as string);
-        
+        console.log(data);
         const stock: StockData = {
             symbol: data.symbol,
             companyName: data.longName || "Unknown Company",
@@ -19,6 +19,7 @@ export const getStock = async (req: Request, res:Response) => {
 
         res.json(stock);
     } catch (error) {
+        console.log(error);
         res.status(500).json({ message: (error as Error).message });
     }
 };
