@@ -12,10 +12,14 @@ const PORT = process.env.PORT || 3002;
 
 // Serves static files in the entire client's dist folder
 
-app.use(express.static('../client/dist'));
 
 app.use(express.json());
 app.use(routes);
+app.use(express.static('../client/dist'));
+app.get('*', (_, res) => {
+  res.sendFile('index.html', { root: '../client/dist' });
+}
+);
 
 sequelize.sync({force: forceDatabaseRefresh}).then(() => {
   app.listen(PORT, () => {

@@ -37,7 +37,6 @@ export function StockFactory(sequelize: Sequelize): typeof Stock {
       symbol: {
         type: DataTypes.STRING,
         allowNull: false,
-        unique: true,
       },
       companyName: {
         type: DataTypes.STRING,

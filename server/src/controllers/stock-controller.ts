@@ -52,9 +52,10 @@ export const getStockById = async (req: Request, res: Response) => {
 export const createStock = async (req: Request, res: Response) => {
   const { symbol, companyName, currentPrice, assignedUserId, lastUpdated } = req.body;
   try {
-    const newStock = await Stock.create({ symbol, companyName, currentPrice, assignedUserId, lastUpdated: lastUpdated || new Date() });
+    const newStock = await Stock.create({ symbol, companyName, currentPrice:Number(currentPrice), assignedUserId, lastUpdated: lastUpdated || new Date() });
     res.status(201).json(newStock);
   } catch (error: any) {
+    console.error('Error creating stock:', error);
     res.status(400).json({ message: error.message });
   }
 };
