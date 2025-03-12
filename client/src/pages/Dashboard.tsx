@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { StockData } from '../interfaces/StockData';
 import StockCard from '../components/StockCard';
 import SearchBar from '../components/SearchBar';
-import { retrieveStocks, deleteStock as deleteStockAPI, createStock, updateStock, } from '../api/stockAPI';
+import { retrieveStocks, deleteStock as deleteStockAPI, createStock, updateStock,getYahooFinanceData } from '../api/stockAPI';
 import ErrorPage from './ErrorPage';
 import StockForm from '../components/StockForm';
 import auth from '../utils/auth';  
@@ -15,6 +15,7 @@ const Dashboard = () => {
   const [showForm, setShowForm] = useState(false);
   const [selectedStock, setSelectedStock] = useState<StockData | null>(null);
   const [error, setError] = useState(false);
+  const [searchQuery, setSearchQuery] = useState('');
 
   // Check if user is logged in before loading stocks
   useEffect(() => {
@@ -44,10 +45,19 @@ const Dashboard = () => {
   };
 
   // Search functionality
-  const handleSearch = (query: string) => {
+  const handleSearchChange =async (query: string) => {
     setFilteredStocks(stocks.filter(stock => stock.companyName?.toLowerCase().includes(query.toLowerCase())));
+    setSearchQuery(query);
   };
-
+  const handleSearch =async () => {
+    try {
+      const data = await getYahooFinanceData(searchQuery);
+      console.log(data);
+    } catch (error) {
+      console.error('Search failed:', error);
+      
+    }
+  };
   // Create new stock
   const handleCreateStock = () => {
   setSelectedStock(null);
@@ -116,10 +126,15 @@ const Dashboard = () => {
 
   return (
     <div className="p-4">
-      <SearchBar onSearch={handleSearch} />
+      <div>
+      <SearchBar onSearch={handleSearchChange} />
+      <button onClick={handleSearch}>Search</button>
+      </div>
+      <div>
       <button onClick={handleCreateStock}>
         + Add Stock
       </button>
+      </div>
 
       {showForm && (
         <StockForm 
