@@ -107,8 +107,8 @@ Ensure you have the following installed:
 - Add social features for users to share insights and trends.
 
 ## Links
-- **Live Application**: [Deployed Link Here]
-- **GitHub Repository**: [Repo Link Here]
+- **Live Application**: [Render Deployed Link Here]
+- **GitHub Repository**: [Git Repository Link Here]
 
 ## License
 This project is licensed under the MIT License.
