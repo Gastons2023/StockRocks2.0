@@ -1,27 +1,23 @@
-import express from 'express';
+import { Router } from 'express';
 import {
-  getAllStocks,
-  getStockById,
-  createStock,
-  updateStock,
-  deleteStock,
-} from '../../controllers/stock-controller.js';
+  getStockJournal, 
+  addStockEntry,
+  updateStockEntry,
+  deleteStockEntry
+} from '../../controllers/stockJournalController.js'; 
 
-const router = express.Router();
+const router = Router();
 
-// GET /stocks - Get all stocks
-router.get('/', getAllStocks);
 
-// GET /stocks/:id - Get a stock by id
-router.get('/:id', getStockById);
+router.post('/', addStockEntry);
 
-// POST /stocks - Create a new stock
-router.post('/', createStock);
 
-// PUT /stocks/:id - Update a stock by id
-router.put('/:id', updateStock);
+router.get('/', getStockJournal);
 
-// DELETE /stocks/:id - Delete a stock by id
-router.delete('/:id', deleteStock);
 
-export { router as stockRouter };
+router.put('/:id', updateStockEntry);
+
+
+router.delete('/:id', deleteStockEntry);
+
+export { router as stockJournalRouter };
