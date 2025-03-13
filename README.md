@@ -107,8 +107,8 @@ Ensure you have the following installed:
 - Add social features for users to share insights and trends.
 
 ## Links
-- **Live Application**: [Render Deployed Link Here]
-- **GitHub Repository**: [Git Repository Link Here]
+- **Live Application**: [https://stockrocks2-0-1.onrender.com/register]
+- **GitHub Repository**: [https://github.com/Gastons2023/StockRocks2.0]
 
 ## License
 This project is licensed under the MIT License.
