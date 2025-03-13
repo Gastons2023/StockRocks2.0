@@ -12,10 +12,3 @@ const SearchBar = ({ onSearch }: SearchBarProps) => {
 };
 
 export default SearchBar;
-
-
-
-"moduleResolution": "node",
-        "esModuleInterop": true,
-        "resolveJsonModule": true,
-        "allowSyntheticDefaultImports": true
