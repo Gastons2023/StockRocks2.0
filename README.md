@@ -3,6 +3,9 @@
 ## Description
 StockRocks is a full-stack web application that allows users to track stock market data, manage a portfolio, and analyze financial trends using data from Yahoo Finance. The app integrates authentication, a PostgreSQL database, and an intuitive React-based UI to deliver a seamless experience for users looking to monitor and manage their stock investments.
 
+## Screenshot
+![alt text](./client/dist/assets/Screenshot%202025-03-13%20170731.png)
+
 ## Table of Contents
 - [Features](#features)
 - [Technologies Used](#technologies-used)
